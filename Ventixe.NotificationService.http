@@ -1,0 +1,6 @@
+@Ventixe.NotificationService_HostAddress = http://localhost:5206
+
+GET {{Ventixe.NotificationService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
