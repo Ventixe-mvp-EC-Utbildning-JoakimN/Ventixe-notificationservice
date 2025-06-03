@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Ventixe.NotificationService.Models;
 using NotificationServiceClass = Ventixe.NotificationService.Services.NotificationService;
 
 namespace Ventixe.NotificationService.Controllers;
@@ -17,10 +18,16 @@ public class NotificationsController : Controller
     }
 
     [HttpPost]
-    public IActionResult Notify([FromBody] int eventId)
+    public async Task<IActionResult> Notify([FromBody] int eventId)
     {
         _logger.LogInformation("📥 POST /api/notifications reached with eventId: {EventId}", eventId);
-        _notificationService.SendNotification(eventId);
-        return Ok();
+        var result = await _notificationService.SendNotificationAsync(eventId);
+        return Ok(result);
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<Notification>> GetAllNotifications()
+    {
+        return Ok(_notificationService.GetAllNotifications());
     }
 }
