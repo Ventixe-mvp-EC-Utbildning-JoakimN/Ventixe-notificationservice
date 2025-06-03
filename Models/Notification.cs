@@ -6,4 +6,6 @@ public class Notification
     public int EventId { get; set; }
     public DateTime SentAt { get; set; } = DateTime.UtcNow;
     public string Message { get; set; } = string.Empty;
+
+    public int? UserId { get; set; }
 }
